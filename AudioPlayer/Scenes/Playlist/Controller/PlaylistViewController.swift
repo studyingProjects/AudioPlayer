@@ -10,9 +10,14 @@ import UIKit
 class PlaylistViewController: UIViewController {
     weak var coordinator: Coordinator?
 
-    private let playlistView = PlaylistView()
+    private let playlistManager = PlaylistManager.shared
+    private var playlistView: PlaylistView?
+    private var playList: [SongProtocol]?
 
     override func loadView() {
+        playList = playlistManager.getPlaylist()
+        playlistView = PlaylistView(with: playList)
+
         view = playlistView
     }
 

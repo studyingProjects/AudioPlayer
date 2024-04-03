@@ -14,7 +14,7 @@
 		6CA85B8B2BBD562C00C55DD4 /* task.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 6CA85B8A2BBD562C00C55DD4 /* task.rtf */; };
 		6CA85B982BBD576A00C55DD4 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA85B972BBD576A00C55DD4 /* PlaylistViewController.swift */; };
 		6CA85B9A2BBD578E00C55DD4 /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA85B992BBD578E00C55DD4 /* PlaylistView.swift */; };
-		6CA85B9C2BBD57A200C55DD4 /* PlaylistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA85B9B2BBD57A200C55DD4 /* PlaylistModel.swift */; };
+		6CA85B9C2BBD57A200C55DD4 /* SongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA85B9B2BBD57A200C55DD4 /* SongModel.swift */; };
 		6CA85B9E2BBD57CF00C55DD4 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA85B9D2BBD57CF00C55DD4 /* UIViewController+Preview.swift */; };
 		6CA85BA22BBD581500C55DD4 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA85BA12BBD581500C55DD4 /* Sizes.swift */; };
 		6CA85BA62BBD59B100C55DD4 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA85BA52BBD59B100C55DD4 /* MainCoordinator.swift */; };
@@ -24,6 +24,7 @@
 		6CA85BAF2BBD607500C55DD4 /* UILabel+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA85BAE2BBD607500C55DD4 /* UILabel+App.swift */; };
 		6CA85BB12BBD6C7B00C55DD4 /* UnderlinedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA85BB02BBD6C7B00C55DD4 /* UnderlinedView.swift */; };
 		6CA85BB32BBD6DAB00C55DD4 /* UIImageView+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA85BB22BBD6DAB00C55DD4 /* UIImageView+App.swift */; };
+		6CA85BB92BBD77C700C55DD4 /* PlaylistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA85BB82BBD77C700C55DD4 /* PlaylistManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +37,7 @@
 		6CA85B8A2BBD562C00C55DD4 /* task.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = task.rtf; sourceTree = "<group>"; };
 		6CA85B972BBD576A00C55DD4 /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		6CA85B992BBD578E00C55DD4 /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
-		6CA85B9B2BBD57A200C55DD4 /* PlaylistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistModel.swift; sourceTree = "<group>"; };
+		6CA85B9B2BBD57A200C55DD4 /* SongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongModel.swift; sourceTree = "<group>"; };
 		6CA85B9D2BBD57CF00C55DD4 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 		6CA85BA12BBD581500C55DD4 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		6CA85BA52BBD59B100C55DD4 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -46,6 +47,7 @@
 		6CA85BAE2BBD607500C55DD4 /* UILabel+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+App.swift"; sourceTree = "<group>"; };
 		6CA85BB02BBD6C7B00C55DD4 /* UnderlinedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedView.swift; sourceTree = "<group>"; };
 		6CA85BB22BBD6DAB00C55DD4 /* UIImageView+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+App.swift"; sourceTree = "<group>"; };
+		6CA85BB82BBD77C700C55DD4 /* PlaylistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				6CA85B872BBD4FE500C55DD4 /* App */,
+				6CA85BB42BBD777B00C55DD4 /* Services */,
 				6CA85B922BBD56C300C55DD4 /* Coordinator */,
 				6CA85B902BBD56A400C55DD4 /* Scenes */,
 				6CA85B8E2BBD568B00C55DD4 /* Constants */,
@@ -183,9 +186,25 @@
 		6CA85B962BBD574E00C55DD4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6CA85B9B2BBD57A200C55DD4 /* PlaylistModel.swift */,
+				6CA85B9B2BBD57A200C55DD4 /* SongModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6CA85BB42BBD777B00C55DD4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6CA85BB52BBD778300C55DD4 /* PlaylistManager */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6CA85BB52BBD778300C55DD4 /* PlaylistManager */ = {
+			isa = PBXGroup;
+			children = (
+				6CA85BB82BBD77C700C55DD4 /* PlaylistManager.swift */,
+			);
+			path = PlaylistManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,12 +303,13 @@
 				6CA85B742BBD4FA000C55DD4 /* AppDelegate.swift in Sources */,
 				6CA85BB12BBD6C7B00C55DD4 /* UnderlinedView.swift in Sources */,
 				6CA85BA62BBD59B100C55DD4 /* MainCoordinator.swift in Sources */,
-				6CA85B9C2BBD57A200C55DD4 /* PlaylistModel.swift in Sources */,
+				6CA85B9C2BBD57A200C55DD4 /* SongModel.swift in Sources */,
 				6CA85BAC2BBD5FC700C55DD4 /* UIFont+App.swift in Sources */,
 				6CA85B762BBD4FA000C55DD4 /* SceneDelegate.swift in Sources */,
 				6CA85B9E2BBD57CF00C55DD4 /* UIViewController+Preview.swift in Sources */,
 				6CA85BAF2BBD607500C55DD4 /* UILabel+App.swift in Sources */,
 				6CA85B9A2BBD578E00C55DD4 /* PlaylistView.swift in Sources */,
+				6CA85BB92BBD77C700C55DD4 /* PlaylistManager.swift in Sources */,
 				6CA85B982BBD576A00C55DD4 /* PlaylistViewController.swift in Sources */,
 				6CA85BAA2BBD5C3000C55DD4 /* UIColor+App.swift in Sources */,
 				6CA85BA82BBD5BF400C55DD4 /* UIView+App.swift in Sources */,

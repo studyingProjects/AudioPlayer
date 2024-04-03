@@ -10,7 +10,6 @@ import UIKit
 class UnderlinedView: UIView {
     private let underlinedLayer = CALayer()
 
-    // private lazy var songTitle: UILabel = UILabel(text: , font: , color: , aligment: )
     private lazy var playImageView = UIImageView.getPlaySmallImageView()
     private lazy var songTitleLabel = UILabel(
         text: "Untitled",
@@ -34,6 +33,17 @@ class UnderlinedView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    convenience init(
+        songTitle: String? = "Untitled",
+        songDuration: String? = "00:00",
+        songCover: String? = ""
+    ) {
+        self.init()
+        songTitleLabel.text = songTitle
+        songDurationLabel.text = songDuration
+    }
+
     // MARK: - LyfeCycle
     override func layoutSubviews() {
         super.layoutSubviews()
