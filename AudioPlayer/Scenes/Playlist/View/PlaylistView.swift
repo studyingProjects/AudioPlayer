@@ -9,7 +9,7 @@ import UIKit
 
 class PlaylistView: UIView {
     private var playList: [SongProtocol]?
-    private var songViews: [(view: UnderlinedView, viewModel: SongProtocol)]?
+    private var songViews = [(view: UnderlinedView, viewModel: SongProtocol)]()
     // MARK: - Init
     init(with playlist: [SongProtocol]?) {
         super.init(frame: .zero)
@@ -32,7 +32,7 @@ class PlaylistView: UIView {
 
         playList?.forEach {
             let songView = UnderlinedView(songTitle: $0.songTitle, songDuration: $0.songDuration)
-            self.addSubview(songView)
+            self.addSubviews(songView)
 
             if let priorView = priorView {
                 setupTopToPriorViewConstraint(from: songView, to: priorView)
@@ -41,7 +41,7 @@ class PlaylistView: UIView {
             }
             setupCommonConstraints(to: songView)
 
-            self.songViews?.append((songView, $0))
+            self.songViews.append((songView, $0))
             priorView = songView
         }
     }
@@ -53,18 +53,18 @@ private extension PlaylistView {
         view.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
     }
 
+    func setupTopToPriorViewConstraint(from currentView: UIView, to priorView: UIView) {
+        currentView.topAnchor.constraint(
+            equalTo: priorView.bottomAnchor,
+            constant: Sizes.Small.padding
+        ).isActive = true
+    }
+
     func setupCommonConstraints(to view: UIView) {
         NSLayoutConstraint.activate([
             view.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            view.heightAnchor.constraint(equalToConstant: Sizes.Large.height)
+            view.heightAnchor.constraint(equalToConstant: Sizes.Medium.height)
         ])
-    }
-
-    func setupTopToPriorViewConstraint(from currentView: UIView, to priorView: UIView) {
-        currentView.topAnchor.constraint(
-            equalTo: priorView.topAnchor,
-            constant: Sizes.Small.padding
-        ).isActive = true
     }
 }

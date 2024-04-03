@@ -14,7 +14,7 @@ class UnderlinedView: UIView {
     private lazy var songTitleLabel = UILabel(
         text: "Untitled",
         font: .appMediumBoldFont,
-        color: .appMinorControls
+        color: .appMajorControls
     )
     private lazy var songDurationLabel = UILabel(
         text: "00:00",
@@ -113,6 +113,6 @@ private extension UnderlinedView {
     }
 
     func setupPriorities() {
-        songTitleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        songDurationLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
 }

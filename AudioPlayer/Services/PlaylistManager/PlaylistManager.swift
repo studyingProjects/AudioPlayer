@@ -18,7 +18,7 @@ class PlaylistManager: PlaylistManagerProtocol {
 
     func getPlaylist() -> [SongProtocol]? {
         let firstSong = SongModel(songTitle: "First song", songDuration: "4:20")
-        let secondSong = SongModel(songTitle: "First song", songDuration: "4:20")
+        let secondSong = SongModel(songTitle: "Second song", songDuration: "4:20")
 
         return [firstSong, secondSong]
     }
