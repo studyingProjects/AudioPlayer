@@ -21,7 +21,8 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let viewController = PlaylistViewController()
+        // let viewController = PlaylistViewController()
+        let viewController = PlayerViewController()
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: false)
     }
