@@ -1,5 +1,5 @@
 //
-//  Header.swift
+//  SongDetailsStackView.swift
 //  AudioPlayer
 //
 //  Created by Andrei Shpartou on 04/04/2024.
@@ -7,21 +7,21 @@
 
 import UIKit
 
-class HeaderStackView: UIStackView {
+class SongDetailsStackView: UIStackView {
     // MARK: - View Properties
-    private lazy var leftButton = UIButton(title: nil, image: "chevron.down")
+    private lazy var leftButton = UIButton(title: nil, image: "plus")
+    private lazy var majorTitle = UILabel(
+        text: "The title of Album",
+        font: .appMediumBoldFont,
+        color: .appMajorControls
+    )
     private lazy var minorTitle = UILabel(
-        text: "Playing from album",
+        text: "The title of Song",
         font: .appSmallFont,
         color: .appMinorControls
     )
-    private lazy var majorTitle = UILabel(
-        text: "The title of Album",
-        font: .appSmallBoldFont,
-        color: .appMajorControls
-    )
     private lazy var titleStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [minorTitle, majorTitle])
+        let stackView = UIStackView(arrangedSubviews: [majorTitle, minorTitle])
         stackView.axis = .vertical
         stackView.spacing = Sizes.XSmall.padding
         stackView.distribution = .fillEqually
@@ -30,7 +30,7 @@ class HeaderStackView: UIStackView {
 
         return stackView
     }()
-    private lazy var rightButton = UIButton(title: nil, image: "square.and.arrow.up")
+    private lazy var rightButton = UIButton(title: nil, image: "ellipsis")
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,7 +47,7 @@ class HeaderStackView: UIStackView {
         axis = .horizontal
         spacing = Sizes.XSmall.padding
         distribution = .fill
-        alignment = .center
+        alignment = .top
         isLayoutMarginsRelativeArrangement = true
     }
 

@@ -10,6 +10,7 @@ import UIKit
 class PlayerView: UIView {
     // MARK: - View Properties
     private lazy var headerStackView = HeaderStackView()
+    private lazy var songDetailsStackView = SongDetailsStackView()
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -29,16 +30,24 @@ class PlayerView: UIView {
     }
 
     private func setupSubviews() {
-        addSubviews(headerStackView)
+        addSubviews(headerStackView, songDetailsStackView)
     }
 }
 // MARK: - Constraints
 private extension PlayerView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
+            // header
             headerStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             headerStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            headerStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
+            headerStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            // details
+            songDetailsStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            songDetailsStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            songDetailsStackView.topAnchor.constraint(
+                equalTo: headerStackView.bottomAnchor,
+                constant: Sizes.Medium.padding
+            )
         ])
     }
 }
