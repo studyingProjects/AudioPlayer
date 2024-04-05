@@ -12,6 +12,7 @@ class PlayerView: UIView {
     private lazy var headerStackView = HeaderStackView()
     private lazy var songDetailsStackView = SongDetailsStackView()
     private lazy var playerControlsStackView = PlayerControlsStackView()
+    private lazy var deviceAvailableStackView = DevicesAvailableStackView()
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -31,7 +32,12 @@ class PlayerView: UIView {
     }
 
     private func setupSubviews() {
-        addSubviews(headerStackView, songDetailsStackView, playerControlsStackView)
+        addSubviews(
+            headerStackView,
+            songDetailsStackView,
+            playerControlsStackView,
+            deviceAvailableStackView
+        )
     }
 }
 // MARK: - Constraints
@@ -56,7 +62,11 @@ private extension PlayerView {
             playerControlsStackView.topAnchor.constraint(
                 equalTo: songDetailsStackView.bottomAnchor,
                 constant: Sizes.Medium.padding
-            )
+            ),
+            // Devices available
+            deviceAvailableStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            deviceAvailableStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            deviceAvailableStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
