@@ -9,7 +9,7 @@ import UIKit
 
 class HeaderStackView: UIStackView {
     // MARK: - View Properties
-    private lazy var leftButton = UIButton(title: nil, image: "chevron.down")
+    private lazy var leftButton = UIButton(image: "chevron.down")
     private lazy var minorTitle = UILabel(
         text: "Playing from album",
         font: .appSmallFont,
@@ -30,7 +30,7 @@ class HeaderStackView: UIStackView {
 
         return stackView
     }()
-    private lazy var rightButton = UIButton(title: nil, image: "square.and.arrow.up")
+    private lazy var rightButton = UIButton(image: "square.and.arrow.up")
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)

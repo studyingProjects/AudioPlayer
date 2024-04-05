@@ -9,7 +9,7 @@ import UIKit
 
 class SongDetailsStackView: UIStackView {
     // MARK: - View Properties
-    private lazy var leftButton = UIButton(title: nil, image: "plus")
+    private lazy var leftButton = UIButton(image: "plus")
     private lazy var majorTitle = UILabel(
         text: "The title of Album",
         font: .appMediumBoldFont,
@@ -30,7 +30,7 @@ class SongDetailsStackView: UIStackView {
 
         return stackView
     }()
-    private lazy var rightButton = UIButton(title: nil, image: "ellipsis")
+    private lazy var rightButton = UIButton(image: "ellipsis")
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)

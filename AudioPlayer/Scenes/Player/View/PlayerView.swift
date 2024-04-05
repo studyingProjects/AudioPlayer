@@ -11,6 +11,7 @@ class PlayerView: UIView {
     // MARK: - View Properties
     private lazy var headerStackView = HeaderStackView()
     private lazy var songDetailsStackView = SongDetailsStackView()
+    private lazy var playerControlsStackView = PlayerControlsStackView()
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -30,22 +31,30 @@ class PlayerView: UIView {
     }
 
     private func setupSubviews() {
-        addSubviews(headerStackView, songDetailsStackView)
+        addSubviews(headerStackView, songDetailsStackView, playerControlsStackView)
     }
 }
 // MARK: - Constraints
 private extension PlayerView {
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            // header
+            // Header
             headerStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             headerStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             headerStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            // details
+            // Details
             songDetailsStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             songDetailsStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             songDetailsStackView.topAnchor.constraint(
                 equalTo: headerStackView.bottomAnchor,
+                constant: Sizes.Medium.padding
+            ),
+            // Player controls
+            playerControlsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            playerControlsStackView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leadingAnchor),
+            playerControlsStackView.trailingAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.trailingAnchor),
+            playerControlsStackView.topAnchor.constraint(
+                equalTo: songDetailsStackView.bottomAnchor,
                 constant: Sizes.Medium.padding
             )
         ])

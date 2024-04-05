@@ -13,9 +13,7 @@ extension UIButton {
         font: UIFont? = nil,
         titleColor: UIColor? = nil,
         backGroundColor: UIColor? = nil,
-        cornerRadius: CGFloat = 0,
-        image: String? = nil,
-        isMajorImage: Bool? = false
+        cornerRadius: CGFloat = 0
     ) {
         self.init(type: .system)
         self.setTitle(title, for: .normal)
@@ -24,20 +22,38 @@ extension UIButton {
         self.setTitleColor(UIColor.tintColor, for: .highlighted)
         self.backgroundColor = backGroundColor
         self.layer.cornerRadius = cornerRadius
-        // adjust image
-        if let image = image {
-            let majorConfig = UIImage.SymbolConfiguration(hierarchicalColor: .black)
-            let minorConfig = UIImage.SymbolConfiguration(hierarchicalColor: .gray)
-            let majorImage = UIImage(systemName: image, withConfiguration: majorConfig)
-            let minorImage = UIImage(systemName: image, withConfiguration: minorConfig)
+    }
 
-            if let isMajorImage = isMajorImage, isMajorImage {
-                self.setImage(majorImage, for: .normal)
-                self.setImage(minorImage, for: .highlighted)
-            } else {
-                self.setImage(minorImage, for: .normal)
-                self.setImage(majorImage, for: .highlighted)
-            }
+    convenience init(
+        image: String,
+        isMajorImage: Bool = false,
+        pointSize: CGFloat? = nil,
+        scale: UIImage.SymbolScale = .default
+    ) {
+        self.init(type: .system)
+        // Adjust image
+        var majorConfig = UIImage.SymbolConfiguration(hierarchicalColor: .black)
+        var minorConfig = UIImage.SymbolConfiguration(hierarchicalColor: .gray)
+        // Scaling
+        if let pointSize = pointSize {
+            let scaleConfig = UIImage.SymbolConfiguration(
+                pointSize: pointSize,
+                weight: .regular,
+                scale: scale
+            )
+            majorConfig = majorConfig.applying(scaleConfig)
+            minorConfig = majorConfig.applying(scaleConfig)
+        }
+        // Get images
+        let majorImage = UIImage(systemName: image, withConfiguration: majorConfig)
+        let minorImage = UIImage(systemName: image, withConfiguration: minorConfig)
+
+        if isMajorImage {
+            self.setImage(majorImage, for: .normal)
+            self.setImage(minorImage, for: .highlighted)
+        } else {
+            self.setImage(minorImage, for: .normal)
+            self.setImage(majorImage, for: .highlighted)
         }
     }
 }
