@@ -11,6 +11,13 @@ class PlayerView: UIView {
     // MARK: - View Properties
     private lazy var headerStackView = HeaderStackView()
     private lazy var songDetailsStackView = SongDetailsStackView()
+
+    private lazy var slider: UISlider = {
+        let slider = UISlider()
+        slider.tintColor = .systemGreen
+        return slider
+    }()
+
     private lazy var playerControlsStackView = PlayerControlsStackView()
     private lazy var deviceAvailableStackView = DevicesAvailableStackView()
 
@@ -35,6 +42,7 @@ class PlayerView: UIView {
         addSubviews(
             headerStackView,
             songDetailsStackView,
+            slider,
             playerControlsStackView,
             deviceAvailableStackView
         )
@@ -51,17 +59,24 @@ private extension PlayerView {
             // Details
             songDetailsStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             songDetailsStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            songDetailsStackView.topAnchor.constraint(
-                equalTo: headerStackView.bottomAnchor,
-                constant: Sizes.Medium.padding
+            songDetailsStackView.bottomAnchor.constraint(
+                equalTo: slider.topAnchor,
+                constant: -Sizes.Medium.padding
+            ),
+            // Slider
+            slider.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            slider.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            slider.bottomAnchor.constraint(
+                equalTo: playerControlsStackView.topAnchor,
+                constant: -Sizes.Medium.padding
             ),
             // Player controls
             playerControlsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             playerControlsStackView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leadingAnchor),
             playerControlsStackView.trailingAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.trailingAnchor),
-            playerControlsStackView.topAnchor.constraint(
-                equalTo: songDetailsStackView.bottomAnchor,
-                constant: Sizes.Medium.padding
+            playerControlsStackView.bottomAnchor.constraint(
+                equalTo: deviceAvailableStackView.topAnchor,
+                constant: -Sizes.Large.padding
             ),
             // Devices available
             deviceAvailableStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
