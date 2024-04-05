@@ -11,13 +11,12 @@ class PlayerView: UIView {
     // MARK: - View Properties
     private lazy var headerStackView = HeaderStackView()
     private lazy var songDetailsStackView = SongDetailsStackView()
-
+    private lazy var albumCover = UIImageView.getPlaySmallImageView()
     private lazy var slider: UISlider = {
         let slider = UISlider()
         slider.tintColor = .systemGreen
         return slider
     }()
-
     private lazy var playerControlsStackView = PlayerControlsStackView()
     private lazy var deviceAvailableStackView = DevicesAvailableStackView()
 
@@ -41,6 +40,7 @@ class PlayerView: UIView {
     private func setupSubviews() {
         addSubviews(
             headerStackView,
+            albumCover,
             songDetailsStackView,
             slider,
             playerControlsStackView,
@@ -56,6 +56,18 @@ private extension PlayerView {
             headerStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             headerStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             headerStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            headerStackView.heightAnchor.constraint(lessThanOrEqualToConstant: Sizes.Small.height),
+            // Album cover
+            albumCover.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            albumCover.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            albumCover.topAnchor.constraint(
+                equalTo: headerStackView.bottomAnchor,
+                constant: Sizes.Medium.padding
+            ),
+            albumCover.bottomAnchor.constraint(
+                equalTo: songDetailsStackView.topAnchor,
+                constant: -Sizes.Medium.padding
+            ),
             // Details
             songDetailsStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             songDetailsStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
@@ -63,6 +75,7 @@ private extension PlayerView {
                 equalTo: slider.topAnchor,
                 constant: -Sizes.Medium.padding
             ),
+            songDetailsStackView.heightAnchor.constraint(lessThanOrEqualToConstant: Sizes.Small.height),
             // Slider
             slider.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             slider.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
@@ -78,10 +91,12 @@ private extension PlayerView {
                 equalTo: deviceAvailableStackView.topAnchor,
                 constant: -Sizes.Large.padding
             ),
+            playerControlsStackView.heightAnchor.constraint(lessThanOrEqualToConstant: Sizes.Medium.height),
             // Devices available
             deviceAvailableStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             deviceAvailableStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            deviceAvailableStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            deviceAvailableStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            deviceAvailableStackView.heightAnchor.constraint(lessThanOrEqualToConstant: Sizes.Small.height)
         ])
     }
 }
