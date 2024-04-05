@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol PlayerViewDelegate: AnyObject {
+    func popCurrentView()
+}
+
 class PlayerView: UIView {
     // MARK: - View Properties
+    weak var delegate: PlayerViewDelegate?
+
     private lazy var headerStackView = HeaderStackView()
     private lazy var songDetailsStackView = SongDetailsStackView()
     private lazy var albumCover = UIImageView.getPlaySmallImageView()
@@ -46,6 +52,14 @@ class PlayerView: UIView {
             playerControlsStackView,
             deviceAvailableStackView
         )
+
+        headerStackView.delegate = self
+    }
+}
+// MARK: - Delegation
+extension PlayerView: HeaderStackViewDelegate {
+    func popCurrentView() {
+        delegate?.popCurrentView()
     }
 }
 // MARK: - Constraints
@@ -55,7 +69,10 @@ private extension PlayerView {
             // Header
             headerStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             headerStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
-            headerStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            headerStackView.topAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.topAnchor,
+                constant: Sizes.Large.padding
+            ),
             headerStackView.heightAnchor.constraint(lessThanOrEqualToConstant: Sizes.Small.height),
             // Album cover
             albumCover.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),

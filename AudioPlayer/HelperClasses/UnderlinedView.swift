@@ -7,9 +7,14 @@
 
 import UIKit
 
-class UnderlinedView: UIView {
-    private let underlinedLayer = CALayer()
+protocol UnderlinedViewDelegate: AnyObject {
+    func openPlayer()
+}
 
+class UnderlinedView: UIView {
+    weak var delegate: UnderlinedViewDelegate?
+
+    private let underlinedLayer = CALayer()
     private lazy var playImageView = UIImageView.getPlaySmallImageView()
     private lazy var songTitleLabel = UILabel(
         text: "Untitled",
@@ -26,6 +31,7 @@ class UnderlinedView: UIView {
         super.init(frame: frame)
 
         self.layer.addSublayer(underlinedLayer)
+        setupView()
         setupSubViews()
         setupConstraints()
     }
@@ -51,6 +57,11 @@ class UnderlinedView: UIView {
         setupUnderlinedLayer()
     }
     // MARK: - Setup view
+    private func setupView() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(openPlayer))
+        addGestureRecognizer(gesture)
+    }
+    
     private func setupSubViews() {
         addSubviews(playImageView, songTitleLabel, songDurationLabel)
     }
@@ -63,6 +74,11 @@ class UnderlinedView: UIView {
 
         underlinedLayer.frame = frame
         underlinedLayer.borderColor = UIColor.systemGray2.cgColor
+    }
+    // MARK: - Action methods
+    @objc
+    private func openPlayer() {
+        delegate?.openPlayer()
     }
 }
 // MARK: - Constraints

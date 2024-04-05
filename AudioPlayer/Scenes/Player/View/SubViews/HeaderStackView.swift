@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol HeaderStackViewDelegate: AnyObject {
+    func popCurrentView()
+}
+
 class HeaderStackView: UIStackView {
     // MARK: - View Properties
+    weak var delegate: HeaderStackViewDelegate?
+
     private lazy var leftButton = UIButton(image: "chevron.down")
     private lazy var minorTitle = UILabel(
         text: "Playing from album",
@@ -52,8 +58,15 @@ class HeaderStackView: UIStackView {
     }
 
     private func setupSubViews() {
+        leftButton.addTarget(self, action: #selector(popCurrentView), for: .touchUpInside)
+
         addArrangedSubview(leftButton)
         addArrangedSubview(titleStackView)
         addArrangedSubview(rightButton)
+    }
+    // MARK: - Action methods
+    @objc
+    private func popCurrentView() {
+        delegate?.popCurrentView()
     }
 }

@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol PlaylistViewDelegate: AnyObject {
+    func openPlayer()
+}
+
 class PlaylistView: UIView {
+    weak var delegate: PlaylistViewDelegate?
+
     private var playList: [SongProtocol]?
     private var songViews = [(view: UnderlinedView, viewModel: SongProtocol)]()
     // MARK: - Init
@@ -32,6 +38,7 @@ class PlaylistView: UIView {
 
         playList?.forEach {
             let songView = UnderlinedView(songTitle: $0.songTitle, songDuration: $0.songDuration)
+            songView.delegate = self
             self.addSubviews(songView)
 
             if let priorView = priorView {
@@ -44,6 +51,12 @@ class PlaylistView: UIView {
             self.songViews.append((songView, $0))
             priorView = songView
         }
+    }
+}
+// MARK: - Delegation
+extension PlaylistView: UnderlinedViewDelegate {
+    func openPlayer() {
+        delegate?.openPlayer()
     }
 }
 // MARK: - Constraints

@@ -17,6 +17,7 @@ class PlaylistViewController: UIViewController {
     override func loadView() {
         playList = playlistManager.getPlaylist()
         playlistView = PlaylistView(with: playList)
+        playlistView?.delegate = self
 
         view = playlistView
     }
@@ -36,5 +37,11 @@ class PlaylistViewController: UIViewController {
         let appearance = UINavigationBarAppearance()
         appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.viewControllerTitleColor]
         navigationController?.navigationBar.standardAppearance = appearance
+    }
+}
+// MARK: - Delegation
+extension PlaylistViewController: PlaylistViewDelegate {
+    func openPlayer() {
+        coordinator?.openPlayer()
     }
 }

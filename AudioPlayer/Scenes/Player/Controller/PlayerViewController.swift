@@ -10,7 +10,15 @@ class PlayerViewController: UIViewController {
     weak var coordinator: Coordinator?
 
     override func loadView() {
-        view = PlayerView()
+        let playerView = PlayerView()
+        playerView.delegate = self
+        view = playerView
+    }
+}
+// MARK: - Delegation
+extension PlayerViewController: PlayerViewDelegate {
+    func popCurrentView() {
+        dismiss(animated: true)
     }
 }
 

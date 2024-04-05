@@ -11,6 +11,7 @@ protocol Coordinator: AnyObject {
     var navigationController: UINavigationController { get set }
 
     func start()
+    func openPlayer()
 }
 
 class MainCoordinator: Coordinator {
@@ -21,9 +22,14 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        // let viewController = PlaylistViewController()
-        let viewController = PlayerViewController()
+        let viewController = PlaylistViewController()
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: false)
+    }
+    
+    func openPlayer() {
+        let viewController = PlayerViewController()
+        viewController.coordinator = self
+        navigationController.present(viewController, animated: true)
     }
 }

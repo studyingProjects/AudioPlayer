@@ -32,6 +32,8 @@
 		6CBEBB9D2BBEB9E2007107C0 /* SongDetailsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBEBB9C2BBEB9E2007107C0 /* SongDetailsStackView.swift */; };
 		6CBEBB9F2BBEBD52007107C0 /* PlayerControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBEBB9E2BBEBD52007107C0 /* PlayerControlsStackView.swift */; };
 		6CF3EDF92BBFF75300870D5C /* DevicesAvailableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF3EDF82BBFF75300870D5C /* DevicesAvailableStackView.swift */; };
+		6CF3EDFD2BC022D200870D5C /* 144C.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6CF3EDFB2BC022D200870D5C /* 144C.mp3 */; };
+		6CF3EDFE2BC022D200870D5C /* 144D.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6CF3EDFC2BC022D200870D5C /* 144D.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		6CBEBB9C2BBEB9E2007107C0 /* SongDetailsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDetailsStackView.swift; sourceTree = "<group>"; };
 		6CBEBB9E2BBEBD52007107C0 /* PlayerControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlsStackView.swift; sourceTree = "<group>"; };
 		6CF3EDF82BBFF75300870D5C /* DevicesAvailableStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesAvailableStackView.swift; sourceTree = "<group>"; };
+		6CF3EDFB2BC022D200870D5C /* 144C.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 144C.mp3; sourceTree = "<group>"; };
+		6CF3EDFC2BC022D200870D5C /* 144D.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 144D.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +156,7 @@
 		6CA85B882BBD501E00C55DD4 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				6CF3EDFA2BC0220C00870D5C /* AudioAssets */,
 				6CA85B812BBD4FA100C55DD4 /* Info.plist */,
 				6CA85B7E2BBD4FA100C55DD4 /* LaunchScreen.storyboard */,
 				6CA85B7C2BBD4FA100C55DD4 /* Assets.xcassets */,
@@ -268,6 +273,15 @@
 			path = SubViews;
 			sourceTree = "<group>";
 		};
+		6CF3EDFA2BC0220C00870D5C /* AudioAssets */ = {
+			isa = PBXGroup;
+			children = (
+				6CF3EDFB2BC022D200870D5C /* 144C.mp3 */,
+				6CF3EDFC2BC022D200870D5C /* 144D.mp3 */,
+			);
+			path = AudioAssets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -329,6 +343,8 @@
 			files = (
 				6CA85B802BBD4FA100C55DD4 /* LaunchScreen.storyboard in Resources */,
 				6CA85B8B2BBD562C00C55DD4 /* task.rtf in Resources */,
+				6CF3EDFD2BC022D200870D5C /* 144C.mp3 in Resources */,
+				6CF3EDFE2BC022D200870D5C /* 144D.mp3 in Resources */,
 				6CA85B7D2BBD4FA100C55DD4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
