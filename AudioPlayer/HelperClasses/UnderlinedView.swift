@@ -61,7 +61,7 @@ class UnderlinedView: UIView {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(openPlayer))
         addGestureRecognizer(gesture)
     }
-    
+
     private func setupSubViews() {
         addSubviews(playImageView, songTitleLabel, songDurationLabel)
     }

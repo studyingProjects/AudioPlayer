@@ -26,7 +26,7 @@ class MainCoordinator: Coordinator {
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: false)
     }
-    
+
     func openPlayer() {
         let viewController = PlayerViewController()
         viewController.coordinator = self

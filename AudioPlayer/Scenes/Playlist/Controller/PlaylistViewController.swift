@@ -10,12 +10,13 @@ import UIKit
 class PlaylistViewController: UIViewController {
     weak var coordinator: Coordinator?
 
-    private let playlistManager = PlaylistManager.shared
+    private let playlistManager = AudioManager.shared
     private var playlistView: PlaylistView?
     private var playList: [SongProtocol]?
 
     override func loadView() {
         playList = playlistManager.getPlaylist()
+
         playlistView = PlaylistView(with: playList)
         playlistView?.delegate = self
 

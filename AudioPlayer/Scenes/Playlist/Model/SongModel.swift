@@ -11,10 +11,12 @@ protocol SongProtocol {
     var songTitle: String? { get set }
     var songDuration: String? { get set }
     var songCover: String? { get set }
+    var songURL: URL? { get set }
 }
 
 struct SongModel: SongProtocol {
     var songTitle: String?
     var songDuration: String?
     var songCover: String?
+    var songURL: URL?
 }
