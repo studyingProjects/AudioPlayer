@@ -37,7 +37,7 @@ class PlaylistView: UIView {
         var priorView: UnderlinedView?
 
         playList?.forEach {
-            let songView = UnderlinedView(songTitle: $0.songTitle, songDuration: $0.songDuration)
+            let songView = UnderlinedView(songTitle: $0.title, songDuration: $0.duration)
             songView.delegate = self
             self.addSubviews(songView)
 

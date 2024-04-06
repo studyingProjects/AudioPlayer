@@ -8,15 +8,19 @@
 import Foundation
 
 protocol SongProtocol {
-    var songTitle: String? { get set }
-    var songDuration: String? { get set }
-    var songCover: String? { get set }
+    var title: String? { get set }
+    var artist: String? { get set }
+    var album: String? { get set }
+    var duration: String? { get set }
+    var cover: String? { get set }
     var songURL: URL? { get set }
 }
 
 struct SongModel: SongProtocol {
-    var songTitle: String?
-    var songDuration: String?
-    var songCover: String?
+    var title: String?
+    var artist: String?
+    var album: String?
+    var duration: String?
+    var cover: String?
     var songURL: URL?
 }

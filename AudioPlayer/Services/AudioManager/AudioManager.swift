@@ -9,7 +9,6 @@ import AVFoundation
 
 protocol PlaylistManagerProtocol {
     func getPlaylist() -> [SongProtocol]?
-    func loadFile(forResource: String?, withExtension: String?) throws -> URL
     func loadPlaylist()
 }
 
@@ -23,9 +22,11 @@ final class AudioManager {
     private var player: AVPlayer?
     private var playlist: [SongProtocol]?
 
-    private init() {}
+    private init() {
+        loadPlaylist()
+    }
 }
-
+// MARK: - PlaylistManager
 extension AudioManager: PlaylistManagerProtocol {
 
     func loadFile(forResource: String?, withExtension: String?) throws -> URL {
@@ -39,28 +40,52 @@ extension AudioManager: PlaylistManagerProtocol {
         return soundFileURL
     }
 
+    func getSongCredentials(songURL: URL) -> SongProtocol {
+        let asset = AVAsset(url: songURL)
+        var song = SongModel()
+
+        let metadata = asset.commonMetadata
+        for item in metadata {
+            if let value = item.value {
+                switch item.commonKey {
+                case AVMetadataKey.commonKeyTitle:
+                    song.title = value as? String
+                case AVMetadataKey.commonKeyArtist:
+                    song.artist = value as? String
+                case AVMetadataKey.commonKeyAlbumName:
+                    song.album = value as? String
+                default:
+                    break
+                }
+            }
+        }
+
+        song.duration = asset.duration.displayTime
+
+        return song
+    }
+// MARK: - Load Playlist
     func loadPlaylist() {
 
         var arrayOfSongs = [SongProtocol]()
 
         do {
             let firstSongURL = try loadFile(forResource: "01. Fire (Remix 2024)", withExtension: "mp3")
-            // let asset = AVAsset(NSURL(fileURLWithPath: firstSongURL)
-            let firstSong = SongModel(songTitle: "First song", songDuration: "4:20", songURL: firstSongURL)
+            let firstSong = getSongCredentials(songURL: firstSongURL)
+            // let firstSong = SongModel(songTitle: "First song", songDuration: "4:20", songURL: firstSongURL)
 
             arrayOfSongs.append(firstSong)
         } catch {}
         do {
-            let secondSongURL = try loadFile(forResource: "01. Fire (Remix 2024)", withExtension: "mp3")
-            let secondSong = SongModel(songTitle: "Second song", songDuration: "4:20", songURL: secondSongURL)
+            let secondSongURL = try loadFile(forResource: "02. Let's Dance Tonight", withExtension: "mp3")
+            let secondSong = getSongCredentials(songURL: secondSongURL)
 
             arrayOfSongs.append(secondSong)
         } catch {}
 
         do {
-            let thirdSongURL = try loadFile(forResource: "01. Fire (Remix 2024)", withExtension: "mp3")
-            let thirdSong = SongModel(songTitle: "Third song", songDuration: "4:20", songURL: thirdSongURL)
-
+            let thirdSongURL = try loadFile(forResource: "03. Burning Heart", withExtension: "mp3")
+            let thirdSong = getSongCredentials(songURL: thirdSongURL)
             arrayOfSongs.append(thirdSong)
         } catch {}
 
@@ -73,7 +98,7 @@ extension AudioManager: PlaylistManagerProtocol {
         return playlist
     }
 }
-
+// MARK: - PlaylistError
 extension PlaylistError: CustomStringConvertible {
     public var description: String {
         switch self {
