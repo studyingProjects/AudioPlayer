@@ -37,10 +37,15 @@ class PlaylistView: UIView {
         var priorView: UnderlinedView?
 
         playList?.forEach {
-            let songView = UnderlinedView(songTitle: $0.title, songDuration: $0.duration)
+            // Prepare songView
+            let songView = UnderlinedView(
+                songTitle: $0.title,
+                songDuration: $0.duration,
+                songCover: $0.cover
+            )
             songView.delegate = self
             self.addSubviews(songView)
-
+            // Setup constraints
             if let priorView = priorView {
                 setupTopToPriorViewConstraint(from: songView, to: priorView)
             } else {

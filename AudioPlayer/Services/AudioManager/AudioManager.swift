@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import UIKit
 
 protocol PlaylistManagerProtocol {
     func getPlaylist() -> [SongProtocol]?
@@ -54,6 +55,11 @@ extension AudioManager: PlaylistManagerProtocol {
                     song.artist = value as? String
                 case AVMetadataKey.commonKeyAlbumName:
                     song.album = value as? String
+                case AVMetadataKey.commonKeyArtwork:
+                    if let dataValue = value as? Data,
+                       let audioImage = UIImage(data: dataValue) {
+                        song.cover = audioImage
+                    }
                 default:
                     break
                 }

@@ -43,11 +43,14 @@ class UnderlinedView: UIView {
     convenience init(
         songTitle: String? = "Untitled",
         songDuration: String? = "00:00",
-        songCover: String? = ""
+        songCover: UIImage?
     ) {
         self.init()
         songTitleLabel.text = songTitle
         songDurationLabel.text = songDuration
+        if let image = songCover {
+            playImageView.image = image
+        }
     }
 
     // MARK: - LyfeCycle
