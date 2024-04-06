@@ -10,15 +10,26 @@ class PlayerViewController: UIViewController {
     weak var coordinator: Coordinator?
 
     private let player = AudioManager.shared
-    
+    private let playerView = PlayerView()
+
+    // MARK: - LyfeCycle
     override func loadView() {
-        let playerView = PlayerView()
         playerView.delegate = self
         view = playerView
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        playerView.delegate?.play()
     }
 }
 // MARK: - Delegation
 extension PlayerViewController: PlayerViewDelegate {
+    func play() {
+        player.play()
+    }
+
     func popCurrentView() {
         dismiss(animated: true)
     }

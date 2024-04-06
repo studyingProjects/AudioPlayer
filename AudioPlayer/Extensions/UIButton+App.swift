@@ -28,9 +28,11 @@ extension UIButton {
         image: String,
         isMajorImage: Bool = false,
         pointSize: CGFloat? = nil,
-        scale: UIImage.SymbolScale = .default
+        scale: UIImage.SymbolScale = .default,
+        selectedImage: String? = nil,
+        type: UIButton.ButtonType = .system
     ) {
-        self.init(type: .system)
+        self.init(type: type)
         // Adjust image
         var majorConfig = UIImage.SymbolConfiguration(hierarchicalColor: .black)
         var minorConfig = UIImage.SymbolConfiguration(hierarchicalColor: .gray)
@@ -47,13 +49,18 @@ extension UIButton {
         // Get images
         let majorImage = UIImage(systemName: image, withConfiguration: majorConfig)
         let minorImage = UIImage(systemName: image, withConfiguration: minorConfig)
-
+        // Set normal / highlighted
         if isMajorImage {
             self.setImage(majorImage, for: .normal)
             self.setImage(minorImage, for: .highlighted)
         } else {
             self.setImage(minorImage, for: .normal)
             self.setImage(majorImage, for: .highlighted)
+        }
+        // Set selected image
+        if let selectedImage = selectedImage {
+            let selectedImage = UIImage(systemName: selectedImage, withConfiguration: majorConfig)
+            self.setImage(selectedImage, for: .selected)
         }
     }
 }

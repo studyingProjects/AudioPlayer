@@ -11,13 +11,12 @@ class PlaylistViewController: UIViewController {
     weak var coordinator: Coordinator?
 
     private let playlistManager = AudioManager.shared
-    private var playlistView: PlaylistView?
-    private var playList: [SongProtocol]?
+    // private var playlistView: PlaylistView?
+    // private var playList: [SongProtocol]?
 
     override func loadView() {
-        playList = playlistManager.getPlaylist()
-
-        playlistView = PlaylistView(with: playList)
+        let playList = playlistManager.getPlaylist()
+        let playlistView: PlaylistView? = PlaylistView(with: playList)
         playlistView?.delegate = self
 
         view = playlistView
@@ -43,6 +42,7 @@ class PlaylistViewController: UIViewController {
 // MARK: - Delegation
 extension PlaylistViewController: PlaylistViewDelegate {
     func openPlayer(with songIndex: Int) {
-        coordinator?.openPlayer(with: songIndex)
+        playlistManager.setCurrentSongIndex(with: songIndex)
+        coordinator?.openPlayer()
     }
 }

@@ -7,8 +7,19 @@
 
 import UIKit
 
+protocol PlayerControlsStackViewDelegate: AnyObject {
+    func shuffle()
+    func priorSong()
+    func nextSong()
+    func play()
+    func pause()
+    func repeatSong()
+}
+
 class PlayerControlsStackView: UIStackView {
+    weak var delegate: PlayerControlsStackViewDelegate?
     // MARK: - View Properties
+    private var isPlayerActive = false
     private lazy var shuffleButton = UIButton(image: "shuffle")
     private lazy var backwardButton = UIButton(
         image: "backward.end.fill",
@@ -20,7 +31,9 @@ class PlayerControlsStackView: UIStackView {
         image: "play.fill",
         isMajorImage: true,
         pointSize: Sizes.Medium.height,
-        scale: .medium
+        scale: .medium,
+        selectedImage: "pause.fill",
+        type: .custom
     )
     private lazy var forwardButton = UIButton(
         image: "forward.end.fill",
@@ -35,7 +48,6 @@ class PlayerControlsStackView: UIStackView {
 
         setupView()
         setupSubViews()
-        setupConstraints()
     }
 
     required init(coder: NSCoder) {
@@ -51,13 +63,57 @@ class PlayerControlsStackView: UIStackView {
     }
 
     private func setupSubViews() {
+        // Setup targets
+        shuffleButton.addTarget(self, action: #selector(shuffle), for: .touchUpInside)
+        backwardButton.addTarget(self, action: #selector(priorSong), for: .touchUpInside)
+        playPauseButton.addTarget(self, action: #selector(playPause), for: .touchUpInside)
+        forwardButton.addTarget(self, action: #selector(nextSong), for: .touchUpInside)
+        repeatButton.addTarget(self, action: #selector(repeatSong), for: .touchUpInside)
+
         addArrangedSubview(shuffleButton)
         addArrangedSubview(backwardButton)
         addArrangedSubview(playPauseButton)
         addArrangedSubview(forwardButton)
         addArrangedSubview(repeatButton)
     }
-}
-private extension PlayerControlsStackView {
-    func setupConstraints() {}
+    // MARK: - Action methods
+    @objc
+    private func shuffle() {
+        delegate?.shuffle()
+    }
+
+    @objc
+    private func priorSong() {
+        delegate?.priorSong()
+    }
+
+    @objc
+    private func playPause(_ sender: UIButton) {
+        // Change play/pause button image
+        sender.isSelected = !sender.isSelected
+
+        // Change play/pause button image
+//        let image = sender.imageView?.image
+//        let highlightedImage = sender.imageView?.highlightedImage
+//
+//        if isPlayerActive {
+//            sender.setImage(image, for: .normal)
+//            sender.setImage(highlightedImage, for: .highlighted)
+//            isPlayerActive = false
+//        } else {
+//            sender.setImage(highlightedImage, for: .normal)
+//            sender.setImage(image, for: .highlighted)
+//            isPlayerActive = true
+//        }
+    }
+
+    @objc
+    private func nextSong() {
+        delegate?.nextSong()
+    }
+
+    @objc
+    private func repeatSong() {
+        delegate?.repeatSong()
+    }
 }

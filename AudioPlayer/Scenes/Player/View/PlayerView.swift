@@ -8,6 +8,7 @@
 import UIKit
 
 protocol PlayerViewDelegate: AnyObject {
+    func play()
     func popCurrentView()
 }
 

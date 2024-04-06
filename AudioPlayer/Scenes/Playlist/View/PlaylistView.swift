@@ -15,7 +15,7 @@ class PlaylistView: UIView {
     weak var delegate: PlaylistViewDelegate?
 
     private var playList: [SongProtocol]?
-    private var songViews = [(view: UnderlinedView, viewModel: SongProtocol)]()
+    // private var songViews = [(view: UnderlinedView, viewModel: SongProtocol)]()
     // MARK: - Init
     init(with playlist: [SongProtocol]?) {
         super.init(frame: .zero)
@@ -59,7 +59,7 @@ class PlaylistView: UIView {
             }
             setupCommonConstraints(to: songView)
 
-            self.songViews.append((songView, song))
+            // self.songViews.append((songView, song))
             priorView = songView
         }
     }

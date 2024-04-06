@@ -9,8 +9,9 @@ import AVFoundation
 import UIKit
 
 protocol PlaylistManagerProtocol {
+    func play()
     func getPlaylist() -> [SongProtocol]?
-    func loadPlaylist()
+    func setCurrentSongIndex(with index: Int)
 }
 
 enum PlaylistError: Error {
@@ -22,14 +23,15 @@ final class AudioManager {
 
     private var player: AVPlayer?
     private var playlist: [SongProtocol]?
+    // Index of current song
+    private var songIndex: Int?
 
     private init() {
         loadPlaylist()
     }
 }
-// MARK: - PlaylistManager
-extension AudioManager: PlaylistManagerProtocol {
-
+// MARK: - Load Playlist
+extension AudioManager {
     func loadFile(forResource: String?, withExtension: String?) throws -> URL {
         guard let soundFileURL = Bundle.main.url(
             forResource: forResource,
@@ -70,7 +72,6 @@ extension AudioManager: PlaylistManagerProtocol {
 
         return song
     }
-// MARK: - Load Playlist
     func loadPlaylist() {
 
         var arrayOfSongs = [SongProtocol]()
@@ -99,9 +100,18 @@ extension AudioManager: PlaylistManagerProtocol {
             playlist = arrayOfSongs
         }
     }
+}
+// MARK: - PlaylistManager
+extension AudioManager: PlaylistManagerProtocol {
+    func play() {
+    }
 
     func getPlaylist() -> [SongProtocol]? {
         return playlist
+    }
+
+    func setCurrentSongIndex(with index: Int) {
+        self.songIndex = index
     }
 }
 // MARK: - PlaylistError
