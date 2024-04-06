@@ -42,7 +42,7 @@ class PlaylistViewController: UIViewController {
 }
 // MARK: - Delegation
 extension PlaylistViewController: PlaylistViewDelegate {
-    func openPlayer() {
-        coordinator?.openPlayer()
+    func openPlayer(with songIndex: Int) {
+        coordinator?.openPlayer(with: songIndex)
     }
 }

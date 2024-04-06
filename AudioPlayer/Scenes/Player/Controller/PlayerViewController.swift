@@ -9,6 +9,8 @@ import UIKit
 class PlayerViewController: UIViewController {
     weak var coordinator: Coordinator?
 
+    private let player = AudioManager.shared
+    
     override func loadView() {
         let playerView = PlayerView()
         playerView.delegate = self

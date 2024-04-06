@@ -11,7 +11,7 @@ protocol Coordinator: AnyObject {
     var navigationController: UINavigationController { get set }
 
     func start()
-    func openPlayer()
+    func openPlayer(with songIndex: Int)
 }
 
 class MainCoordinator: Coordinator {
@@ -27,7 +27,7 @@ class MainCoordinator: Coordinator {
         navigationController.pushViewController(viewController, animated: false)
     }
 
-    func openPlayer() {
+    func openPlayer(with songIndex: Int) {
         let viewController = PlayerViewController()
         viewController.coordinator = self
         navigationController.present(viewController, animated: true)

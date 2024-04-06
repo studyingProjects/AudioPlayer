@@ -8,7 +8,7 @@
 import UIKit
 
 protocol UnderlinedViewDelegate: AnyObject {
-    func openPlayer()
+    func openPlayer(with songIndex: Int)
 }
 
 class UnderlinedView: UIView {
@@ -43,9 +43,11 @@ class UnderlinedView: UIView {
     convenience init(
         songTitle: String? = "Untitled",
         songDuration: String? = "00:00",
-        songCover: UIImage?
+        songCover: UIImage?,
+        index: Int
     ) {
         self.init()
+        self.tag = index
         songTitleLabel.text = songTitle
         songDurationLabel.text = songDuration
         if let image = songCover {
@@ -81,7 +83,7 @@ class UnderlinedView: UIView {
     // MARK: - Action methods
     @objc
     private func openPlayer() {
-        delegate?.openPlayer()
+        delegate?.openPlayer(with: self.tag)
     }
 }
 // MARK: - Constraints

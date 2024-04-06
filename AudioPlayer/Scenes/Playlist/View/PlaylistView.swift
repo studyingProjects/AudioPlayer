@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PlaylistViewDelegate: AnyObject {
-    func openPlayer()
+    func openPlayer(with songIndex: Int)
 }
 
 class PlaylistView: UIView {
@@ -36,13 +36,19 @@ class PlaylistView: UIView {
     private func setupSubViews() {
         var priorView: UnderlinedView?
 
-        playList?.forEach {
+        guard let playList = playList else {
+            return
+        }
+
+        for (index, song) in playList.enumerated() {
             // Prepare songView
             let songView = UnderlinedView(
-                songTitle: $0.title,
-                songDuration: $0.duration,
-                songCover: $0.cover
+                songTitle: song.title,
+                songDuration: song.duration,
+                songCover: song.cover,
+                index: index
             )
+
             songView.delegate = self
             self.addSubviews(songView)
             // Setup constraints
@@ -53,15 +59,15 @@ class PlaylistView: UIView {
             }
             setupCommonConstraints(to: songView)
 
-            self.songViews.append((songView, $0))
+            self.songViews.append((songView, song))
             priorView = songView
         }
     }
 }
 // MARK: - Delegation
 extension PlaylistView: UnderlinedViewDelegate {
-    func openPlayer() {
-        delegate?.openPlayer()
+    func openPlayer(with songIndex: Int) {
+        delegate?.openPlayer(with: songIndex)
     }
 }
 // MARK: - Constraints
