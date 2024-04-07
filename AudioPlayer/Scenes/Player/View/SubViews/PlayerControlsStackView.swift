@@ -48,8 +48,6 @@ class PlayerControlsStackView: UIStackView {
 
         setupView()
         setupSubViews()
-        // Start playng while opening
-        playPause(playPauseButton)
     }
 
     required init(coder: NSCoder) {
@@ -108,5 +106,11 @@ class PlayerControlsStackView: UIStackView {
     @objc
     private func repeatSong() {
         delegate?.repeatSong()
+    }
+}
+// MARK: - ViewControllerDelegate
+extension PlayerControlsStackView: PlayerViewControllerDelegate {
+    func playAfterViewAppeared() {
+        playPause(playPauseButton)
     }
 }

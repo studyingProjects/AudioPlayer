@@ -19,6 +19,7 @@ protocol PlayerViewDelegate: AnyObject {
     func popCurrentView()
 }
 
+
 class PlayerView: UIView {
     // MARK: - View Properties
     weak var delegate: PlayerViewDelegate?
@@ -95,6 +96,12 @@ extension PlayerView: PlayerControlsStackViewDelegate {
 
     func repeatSong() {
         delegate?.repeatSong()
+    }
+}
+// MARK: - ViewControllerDelegate
+extension PlayerView: PlayerViewControllerDelegate {
+    func playAfterViewAppeared() {
+        playerControlsStackView.playAfterViewAppeared()
     }
 }
 // MARK: - Constraints

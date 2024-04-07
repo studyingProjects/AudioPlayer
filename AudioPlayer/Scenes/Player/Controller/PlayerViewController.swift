@@ -6,8 +6,13 @@
 //
 import UIKit
 
+protocol PlayerViewControllerDelegate: AnyObject {
+    func playAfterViewAppeared()
+}
+
 class PlayerViewController: UIViewController {
     weak var coordinator: Coordinator?
+    weak var delegate: PlayerViewControllerDelegate?
 
     private let player = AudioManager.shared
     private let playerView = PlayerView()
@@ -15,7 +20,13 @@ class PlayerViewController: UIViewController {
     // MARK: - LyfeCycle
     override func loadView() {
         playerView.delegate = self
+        self.delegate = playerView
         view = playerView
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        delegate?.playAfterViewAppeared()
     }
 }
 // MARK: - Delegation

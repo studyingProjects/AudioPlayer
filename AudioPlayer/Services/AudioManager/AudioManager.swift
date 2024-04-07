@@ -25,7 +25,7 @@ enum PlaylistError: Error {
 final class AudioManager {
     static let shared = AudioManager()
 
-    private var player: AVPlayer?
+    private var player: AVAudioPlayer?
     private var playlist: [SongProtocol]?
     // Index of current song
     private var songIndex: Int?
@@ -36,7 +36,20 @@ final class AudioManager {
 }
 // MARK: - PlayerControls
 extension AudioManager: PlayerControlsProtocol {
-    func play() {}
+    func play() {
+
+        guard let songIndex = songIndex,
+              let currentSongURL = playlist?[songIndex].songURL else {
+            return
+        }
+
+        do {
+            player = try AVAudioPlayer(contentsOf: currentSongURL)
+            player?.play()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
 // MARK: - Load Playlist
 extension AudioManager {
@@ -76,6 +89,7 @@ extension AudioManager {
             }
         }
 
+        song.songURL = songURL
         song.duration = asset.duration.displayTime
 
         return song
