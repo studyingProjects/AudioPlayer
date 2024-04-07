@@ -7,7 +7,13 @@
 import UIKit
 
 protocol PlayerViewControllerDelegate: AnyObject {
-    func updateView(album: String?, song: String?, cover: UIImage?, duration: String?)
+    func updateView(
+        album: String?,
+        song: String?,
+        cover: UIImage?,
+        duration: String?,
+        durationFloat: Float?
+    )
     func playAfterViewAppeared()
 }
 
@@ -29,7 +35,8 @@ class PlayerViewController: UIViewController {
                 album: currentSong.album,
                 song: currentSong.title,
                 cover: currentSong.cover,
-                duration: currentSong.duration
+                duration: currentSong.duration,
+                durationFloat: currentSong.durationFloat
             )
         }
     }
@@ -41,6 +48,10 @@ class PlayerViewController: UIViewController {
 }
 // MARK: - Delegation
 extension PlayerViewController: PlayerViewDelegate {
+    func sliderChanged(with value: Float) {
+        player.setCurrentTime(with: value)
+    }
+
     // Plyaer controls
     func shuffle() {}
 

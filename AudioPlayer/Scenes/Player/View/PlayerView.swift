@@ -8,6 +8,7 @@
 import UIKit
 
 protocol PlayerViewDelegate: AnyObject {
+    func sliderChanged(with value: Float)
     // Player controls
     func shuffle()
     func priorSong()
@@ -29,6 +30,8 @@ class PlayerView: UIView {
     private lazy var slider: UISlider = {
         let slider = UISlider()
         slider.tintColor = .systemGreen
+        slider.minimumValue = 0
+        slider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
         return slider
     }()
     private lazy var playerControlsStackView = PlayerControlsStackView()
@@ -64,6 +67,11 @@ class PlayerView: UIView {
         headerStackView.delegate = self
         playerControlsStackView.delegate = self
     }
+    // MARK: - Action methods
+    @objc
+    private func sliderChanged(sender: UISlider) {
+        delegate?.sliderChanged(with: sender.value)
+    }
 }
 // MARK: - Delegation
 extension PlayerView: HeaderStackViewDelegate {
@@ -73,10 +81,18 @@ extension PlayerView: HeaderStackViewDelegate {
 }
 // MARK: - ViewControllerDelegate
 extension PlayerView: PlayerViewControllerDelegate {
-    func updateView(album: String?, song: String?, cover: UIImage?, duration: String?) {
+    func updateView(
+        album: String?,
+        song: String?,
+        cover: UIImage?,
+        duration: String?,
+        durationFloat: Float?
+    ) {
         headerStackView.updateView(with: album)
         albumCover.image = cover
         songDetailsStackView.updateView(with: album, and: song)
+
+        slider.maximumValue = durationFloat ?? 0
     }
 
     func playAfterViewAppeared() {
