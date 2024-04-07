@@ -64,6 +64,10 @@ class HeaderStackView: UIStackView {
         addArrangedSubview(titleStackView)
         addArrangedSubview(rightButton)
     }
+    // MARK: - Public methods
+    func updateView(with album: String?) {
+        majorTitle.text = album
+    }
     // MARK: - Action methods
     @objc
     private func popCurrentView() {

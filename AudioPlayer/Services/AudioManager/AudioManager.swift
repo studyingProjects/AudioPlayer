@@ -9,6 +9,7 @@ import AVFoundation
 import UIKit
 
 protocol PlaylistManagerProtocol: AnyObject {
+    var currentSong: SongProtocol? { get }
 
     func getPlaylist() -> [SongProtocol]?
     func setCurrentSongIndex(with index: Int)
@@ -48,10 +49,10 @@ extension AudioManager: PlayerControlsProtocol {
             player = try AVAudioPlayer(contentsOf: currentSongURL)
             player?.play()
         } catch {
-            print(error.localizedDescription)
+            // print(error.localizedDescription)
         }
     }
-    
+
     func pause() {
         guard let player = player else { return }
 
@@ -132,6 +133,14 @@ extension AudioManager {
 }
 // MARK: - PlaylistManager
 extension AudioManager: PlaylistManagerProtocol {
+    var currentSong: SongProtocol? {
+        guard let songIndex = songIndex,
+              let currentSong = playlist?[songIndex] else {
+            return nil
+        }
+
+        return currentSong
+    }
 
     func getPlaylist() -> [SongProtocol]? {
         return playlist

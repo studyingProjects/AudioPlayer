@@ -19,7 +19,6 @@ protocol PlayerViewDelegate: AnyObject {
     func popCurrentView()
 }
 
-
 class PlayerView: UIView {
     // MARK: - View Properties
     weak var delegate: PlayerViewDelegate?
@@ -72,6 +71,18 @@ extension PlayerView: HeaderStackViewDelegate {
         delegate?.popCurrentView()
     }
 }
+// MARK: - ViewControllerDelegate
+extension PlayerView: PlayerViewControllerDelegate {
+    func updateView(album: String?, song: String?, cover: UIImage?, duration: String?) {
+        headerStackView.updateView(with: album)
+        albumCover.image = cover
+        songDetailsStackView.updateView(with: album, and: song)
+    }
+
+    func playAfterViewAppeared() {
+        playerControlsStackView.playAfterViewAppeared()
+    }
+}
 // MARK: - Player Controls delegation
 extension PlayerView: PlayerControlsStackViewDelegate {
     func shuffle() {
@@ -96,12 +107,6 @@ extension PlayerView: PlayerControlsStackViewDelegate {
 
     func repeatSong() {
         delegate?.repeatSong()
-    }
-}
-// MARK: - ViewControllerDelegate
-extension PlayerView: PlayerViewControllerDelegate {
-    func playAfterViewAppeared() {
-        playerControlsStackView.playAfterViewAppeared()
     }
 }
 // MARK: - Constraints

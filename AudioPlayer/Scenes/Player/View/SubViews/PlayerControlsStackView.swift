@@ -76,6 +76,10 @@ class PlayerControlsStackView: UIStackView {
         addArrangedSubview(forwardButton)
         addArrangedSubview(repeatButton)
     }
+    // MARK: - Public methods
+    func playAfterViewAppeared() {
+        playPause(playPauseButton)
+    }
     // MARK: - Action methods
     @objc
     private func shuffle() {
@@ -106,11 +110,5 @@ class PlayerControlsStackView: UIStackView {
     @objc
     private func repeatSong() {
         delegate?.repeatSong()
-    }
-}
-// MARK: - ViewControllerDelegate
-extension PlayerControlsStackView: PlayerViewControllerDelegate {
-    func playAfterViewAppeared() {
-        playPause(playPauseButton)
     }
 }

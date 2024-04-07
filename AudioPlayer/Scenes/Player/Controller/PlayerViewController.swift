@@ -7,6 +7,7 @@
 import UIKit
 
 protocol PlayerViewControllerDelegate: AnyObject {
+    func updateView(album: String?, song: String?, cover: UIImage?, duration: String?)
     func playAfterViewAppeared()
 }
 
@@ -15,13 +16,22 @@ class PlayerViewController: UIViewController {
     weak var delegate: PlayerViewControllerDelegate?
 
     private let player = AudioManager.shared
-    private let playerView = PlayerView()
+    private var playerView = PlayerView()
 
     // MARK: - LyfeCycle
     override func loadView() {
         playerView.delegate = self
-        self.delegate = playerView
         view = playerView
+        self.delegate = playerView
+
+        if let currentSong = player.currentSong {
+            delegate?.updateView(
+                album: currentSong.album,
+                song: currentSong.title,
+                cover: currentSong.cover,
+                duration: currentSong.duration
+            )
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

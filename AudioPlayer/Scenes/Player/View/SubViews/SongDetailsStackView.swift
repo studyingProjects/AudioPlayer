@@ -56,4 +56,9 @@ class SongDetailsStackView: UIStackView {
         addArrangedSubview(titleStackView)
         addArrangedSubview(rightButton)
     }
+    // MARK: - Public methods
+    func updateView(with album: String?, and song: String?) {
+        majorTitle.text = album
+        minorTitle.text = song
+    }
 }
