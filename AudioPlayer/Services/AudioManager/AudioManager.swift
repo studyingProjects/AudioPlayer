@@ -8,10 +8,14 @@
 import AVFoundation
 import UIKit
 
-protocol PlaylistManagerProtocol {
-    func play()
+protocol PlaylistManagerProtocol: AnyObject {
+
     func getPlaylist() -> [SongProtocol]?
     func setCurrentSongIndex(with index: Int)
+}
+
+protocol PlayerControlsProtocol: AnyObject {
+    func play()
 }
 
 enum PlaylistError: Error {
@@ -29,6 +33,10 @@ final class AudioManager {
     private init() {
         loadPlaylist()
     }
+}
+// MARK: - PlayerControls
+extension AudioManager: PlayerControlsProtocol {
+    func play() {}
 }
 // MARK: - Load Playlist
 extension AudioManager {
@@ -103,8 +111,6 @@ extension AudioManager {
 }
 // MARK: - PlaylistManager
 extension AudioManager: PlaylistManagerProtocol {
-    func play() {
-    }
 
     func getPlaylist() -> [SongProtocol]? {
         return playlist

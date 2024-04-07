@@ -8,7 +8,14 @@
 import UIKit
 
 protocol PlayerViewDelegate: AnyObject {
+    // Player controls
+    func shuffle()
+    func priorSong()
+    func nextSong()
     func play()
+    func pause()
+    func repeatSong()
+
     func popCurrentView()
 }
 
@@ -55,12 +62,39 @@ class PlayerView: UIView {
         )
 
         headerStackView.delegate = self
+        playerControlsStackView.delegate = self
     }
 }
 // MARK: - Delegation
 extension PlayerView: HeaderStackViewDelegate {
     func popCurrentView() {
         delegate?.popCurrentView()
+    }
+}
+// MARK: - Player Controls delegation
+extension PlayerView: PlayerControlsStackViewDelegate {
+    func shuffle() {
+        delegate?.shuffle()
+    }
+
+    func priorSong() {
+        delegate?.priorSong()
+    }
+
+    func nextSong() {
+        delegate?.nextSong()
+    }
+
+    func play() {
+        delegate?.play()
+    }
+
+    func pause() {
+        delegate?.pause()
+    }
+
+    func repeatSong() {
+        delegate?.repeatSong()
     }
 }
 // MARK: - Constraints

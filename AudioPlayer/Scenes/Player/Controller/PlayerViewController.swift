@@ -17,19 +17,24 @@ class PlayerViewController: UIViewController {
         playerView.delegate = self
         view = playerView
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        playerView.delegate?.play()
-    }
 }
 // MARK: - Delegation
 extension PlayerViewController: PlayerViewDelegate {
+    // Plyaer controls
+    func shuffle() {}
+
+    func priorSong() {}
+
+    func nextSong() {}
+
     func play() {
         player.play()
     }
 
+    func pause() {}
+
+    func repeatSong() {}
+    // View managing
     func popCurrentView() {
         dismiss(animated: true)
     }

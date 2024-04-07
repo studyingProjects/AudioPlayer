@@ -48,6 +48,8 @@ class PlayerControlsStackView: UIStackView {
 
         setupView()
         setupSubViews()
+        // Start playng while opening
+        playPause(playPauseButton)
     }
 
     required init(coder: NSCoder) {
@@ -90,21 +92,12 @@ class PlayerControlsStackView: UIStackView {
     @objc
     private func playPause(_ sender: UIButton) {
         // Change play/pause button image
+        if sender.isSelected {
+            delegate?.pause()
+        } else {
+            delegate?.play()
+        }
         sender.isSelected = !sender.isSelected
-
-        // Change play/pause button image
-//        let image = sender.imageView?.image
-//        let highlightedImage = sender.imageView?.highlightedImage
-//
-//        if isPlayerActive {
-//            sender.setImage(image, for: .normal)
-//            sender.setImage(highlightedImage, for: .highlighted)
-//            isPlayerActive = false
-//        } else {
-//            sender.setImage(highlightedImage, for: .normal)
-//            sender.setImage(image, for: .highlighted)
-//            isPlayerActive = true
-//        }
     }
 
     @objc
