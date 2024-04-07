@@ -16,6 +16,7 @@ protocol PlaylistManagerProtocol: AnyObject {
 
 protocol PlayerControlsProtocol: AnyObject {
     func play()
+    func pause()
 }
 
 enum PlaylistError: Error {
@@ -49,6 +50,12 @@ extension AudioManager: PlayerControlsProtocol {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func pause() {
+        guard let player = player else { return }
+
+        player.pause()
     }
 }
 // MARK: - Load Playlist

@@ -42,7 +42,9 @@ extension PlayerViewController: PlayerViewDelegate {
         player.play()
     }
 
-    func pause() {}
+    func pause() {
+        player.pause()
+    }
 
     func repeatSong() {}
     // View managing
