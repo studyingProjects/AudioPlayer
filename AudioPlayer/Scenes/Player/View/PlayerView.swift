@@ -31,6 +31,7 @@ class PlayerView: UIView {
         let slider = UISlider()
         slider.tintColor = .systemGreen
         slider.minimumValue = 0
+        slider.isContinuous = false
         slider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
         return slider
     }()
@@ -81,6 +82,14 @@ extension PlayerView: HeaderStackViewDelegate {
 }
 // MARK: - ViewControllerDelegate
 extension PlayerView: PlayerViewControllerDelegate {
+    func setPauseView() {
+        playerControlsStackView
+    }
+
+    func updateSongProgress(with value: Float) {
+        slider.value = value
+    }
+
     func updateView(
         album: String?,
         song: String?,
@@ -95,8 +104,8 @@ extension PlayerView: PlayerViewControllerDelegate {
         slider.maximumValue = durationFloat ?? 0
     }
 
-    func playAfterViewAppeared() {
-        playerControlsStackView.playAfterViewAppeared()
+    func sendPlayPauseUpdate() {
+        playerControlsStackView.sendPlayPauseUpdate()
     }
 }
 // MARK: - Player Controls delegation

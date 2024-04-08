@@ -16,6 +16,7 @@ protocol PlaylistManagerProtocol: AnyObject {
 }
 
 protocol PlayerControlsProtocol: AnyObject {
+    func getCurrentTime() -> Float
     func setCurrentTime(with value: Float)
     func play()
     func pause()
@@ -39,6 +40,10 @@ final class AudioManager {
 }
 // MARK: - PlayerControls
 extension AudioManager: PlayerControlsProtocol {
+    func getCurrentTime() -> Float {
+        return Float(player?.currentTime ?? 0)
+    }
+
     func setCurrentTime(with value: Float) {
         player?.currentTime = TimeInterval(value)
     }
@@ -47,6 +52,13 @@ extension AudioManager: PlayerControlsProtocol {
 
         guard let songIndex = songIndex,
               let currentSongURL = playlist?[songIndex].songURL else {
+            return
+        }
+
+        if let player = player,
+           currentSongURL == player.url {
+            player.play()
+
             return
         }
 

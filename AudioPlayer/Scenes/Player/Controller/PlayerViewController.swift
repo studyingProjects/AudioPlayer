@@ -7,6 +7,9 @@
 import UIKit
 
 protocol PlayerViewControllerDelegate: AnyObject {
+
+    func updateSongProgress(with value: Float)
+
     func updateView(
         album: String?,
         song: String?,
@@ -14,13 +17,16 @@ protocol PlayerViewControllerDelegate: AnyObject {
         duration: String?,
         durationFloat: Float?
     )
-    func playAfterViewAppeared()
+
+    func sendPlayPauseUpdate()
 }
 
 class PlayerViewController: UIViewController {
     weak var coordinator: Coordinator?
     weak var delegate: PlayerViewControllerDelegate?
 
+    private var timer: Timer?
+    private var songDuration: Float?
     private let player = AudioManager.shared
     private var playerView = PlayerView()
 
@@ -38,12 +44,23 @@ class PlayerViewController: UIViewController {
                 duration: currentSong.duration,
                 durationFloat: currentSong.durationFloat
             )
+
+            songDuration = currentSong.durationFloat
         }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        delegate?.playAfterViewAppeared()
+        delegate?.sendPlayPauseUpdate()
+    }
+    // MARK: - Action methods
+    @objc private func updateSongProgress() {
+        let currentTime = player.getCurrentTime()
+        delegate?.updateSongProgress(with: currentTime)
+
+        if currentTime == 0 || currentTime >= songDuration ?? 0 {
+            delegate?.sendPlayPauseUpdate()
+        }
     }
 }
 // MARK: - Delegation
@@ -61,10 +78,20 @@ extension PlayerViewController: PlayerViewDelegate {
 
     func play() {
         player.play()
+
+        timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(updateSongProgress),
+            userInfo: nil,
+            repeats: true
+        )
     }
 
     func pause() {
         player.pause()
+
+        timer?.invalidate()
     }
 
     func repeatSong() {}

@@ -77,7 +77,7 @@ class PlayerControlsStackView: UIStackView {
         addArrangedSubview(repeatButton)
     }
     // MARK: - Public methods
-    func playAfterViewAppeared() {
+    func sendPlayPauseUpdate() {
         playPause(playPauseButton)
     }
     // MARK: - Action methods
