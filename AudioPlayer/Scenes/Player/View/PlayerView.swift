@@ -82,9 +82,6 @@ extension PlayerView: HeaderStackViewDelegate {
 }
 // MARK: - ViewControllerDelegate
 extension PlayerView: PlayerViewControllerDelegate {
-    func setPauseView() {
-        playerControlsStackView
-    }
 
     func updateSongProgress(with value: Float) {
         slider.value = value

@@ -72,9 +72,13 @@ extension PlayerViewController: PlayerViewDelegate {
     // Plyaer controls
     func shuffle() {}
 
-    func priorSong() {}
+    func priorSong() {
+        player.priorSong()
+    }
 
-    func nextSong() {}
+    func nextSong() {
+        player.nextSong()
+    }
 
     func play() {
         player.play()
