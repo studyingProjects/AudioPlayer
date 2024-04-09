@@ -46,3 +46,13 @@ extension PlaylistViewController: PlaylistViewDelegate {
         coordinator?.openPlayer()
     }
 }
+
+import SwiftUI
+struct ViewControllerProvider: PreviewProvider {
+    static var previews: some View {
+        Group {
+            // change to your vc
+            PlaylistViewController().preview()
+        }
+    }
+}

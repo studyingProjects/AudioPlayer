@@ -123,13 +123,3 @@ extension PlayerViewController: PlayerViewDelegate {
         dismiss(animated: true)
     }
 }
-
-import SwiftUI
-struct ViewControllerProvider: PreviewProvider {
-    static var previews: some View {
-        Group {
-            // change to your vc
-            PlayerViewController().preview()
-        }
-    }
-}
