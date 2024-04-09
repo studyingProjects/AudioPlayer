@@ -16,12 +16,13 @@ protocol PlaylistManagerProtocol: AnyObject {
 }
 
 protocol PlayerControlsProtocol: AnyObject {
+    func isPlaying() -> Bool
     func getCurrentTime() -> Float
     func setCurrentTime(with value: Float)
     func play()
     func pause()
-    func nextSong()
-    func priorSong()
+    func nextSong() -> Bool
+    func priorSong() -> Bool
 }
 
 enum PlaylistError: Error {
@@ -42,10 +43,15 @@ final class AudioManager {
 }
 // MARK: - PlayerControls
 extension AudioManager: PlayerControlsProtocol {
-    func nextSong() {
+
+    func isPlaying() -> Bool {
+        return player?.isPlaying ?? false
+    }
+
+    func nextSong() -> Bool {
         guard let songIndex = songIndex,
               let countOfSSongs = playlist?.count  else {
-            return
+            return false
         }
 
         var nextSongIndex = songIndex + 1
@@ -54,13 +60,14 @@ extension AudioManager: PlayerControlsProtocol {
         }
 
         setCurrentSongIndex(with: nextSongIndex)
-        play()
+
+        return true
     }
 
-    func priorSong() {
+    func priorSong() -> Bool {
         guard let songIndex = songIndex,
               let countOfSSongs = playlist?.count  else {
-            return
+            return false
         }
 
         var priorSongIndex = songIndex - 1
@@ -69,7 +76,8 @@ extension AudioManager: PlayerControlsProtocol {
         }
 
         setCurrentSongIndex(with: priorSongIndex)
-        play()
+
+        return true
     }
 
     func getCurrentTime() -> Float {

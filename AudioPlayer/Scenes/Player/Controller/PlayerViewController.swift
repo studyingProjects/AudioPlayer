@@ -36,17 +36,7 @@ class PlayerViewController: UIViewController {
         view = playerView
         self.delegate = playerView
 
-        if let currentSong = player.currentSong {
-            delegate?.updateView(
-                album: currentSong.album,
-                song: currentSong.title,
-                cover: currentSong.cover,
-                duration: currentSong.duration,
-                durationFloat: currentSong.durationFloat
-            )
-
-            songDuration = currentSong.durationFloat
-        }
+        updateView()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -62,6 +52,31 @@ class PlayerViewController: UIViewController {
             delegate?.sendPlayPauseUpdate()
         }
     }
+    // MARK: - Helper methods
+    private func updateView() {
+        if let currentSong = player.currentSong {
+            delegate?.updateView(
+                album: currentSong.album,
+                song: currentSong.title,
+                cover: currentSong.cover,
+                duration: currentSong.duration,
+                durationFloat: currentSong.durationFloat
+            )
+
+            songDuration = currentSong.durationFloat
+        }
+    }
+
+    private func updateCurrentSong() {
+        timer?.invalidate()
+        updateView()
+        delegate?.updateSongProgress(with: 0)
+        if player.isPlaying() {
+            play()
+        } else {
+            delegate?.sendPlayPauseUpdate()
+        }
+    }
 }
 // MARK: - Delegation
 extension PlayerViewController: PlayerViewDelegate {
@@ -73,11 +88,15 @@ extension PlayerViewController: PlayerViewDelegate {
     func shuffle() {}
 
     func priorSong() {
-        player.priorSong()
+        if player.priorSong() {
+            updateCurrentSong()
+        }
     }
 
     func nextSong() {
-        player.nextSong()
+        if player.nextSong() {
+            updateCurrentSong()
+        }
     }
 
     func play() {
