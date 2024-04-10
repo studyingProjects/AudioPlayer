@@ -80,6 +80,38 @@ class PlayerViewController: UIViewController {
 }
 // MARK: - Delegation
 extension PlayerViewController: PlayerViewDelegate {
+    func shareSong() {
+        let activityController = UIActivityViewController(
+            activityItems: [player.currentSong?.title ?? "nil"],
+            applicationActivities: nil
+        )
+
+//        activityController.completionWithItemsHandler = { activity, success, items, error in
+//            if success {
+//                print("Successfully shared!")
+//            } else {
+//                print("Failed to share")
+//            }
+//        }
+
+        activityController.excludedActivityTypes = [
+            .postToTwitter,
+            .postToWeibo,
+            .message,
+            .mail,
+            .print,
+            .copyToPasteboard,
+            .assignToContact,
+            .saveToCameraRoll,
+            .addToReadingList,
+            .postToFlickr,
+            .postToVimeo,
+            .postToTencentWeibo
+        ]
+
+        self.present(activityController, animated: true)
+    }
+
     func sliderChanged(with value: Float) {
         player.setCurrentTime(with: value)
     }

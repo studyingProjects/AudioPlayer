@@ -16,6 +16,7 @@ protocol PlayerViewDelegate: AnyObject {
     func play()
     func pause()
     func repeatSong()
+    func shareSong()
 
     func popCurrentView()
 }
@@ -76,6 +77,10 @@ class PlayerView: UIView {
 }
 // MARK: - Delegation
 extension PlayerView: HeaderStackViewDelegate {
+    func shareSong() {
+        delegate?.shareSong()
+    }
+
     func popCurrentView() {
         delegate?.popCurrentView()
     }

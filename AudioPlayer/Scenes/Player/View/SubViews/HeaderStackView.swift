@@ -9,6 +9,7 @@ import UIKit
 
 protocol HeaderStackViewDelegate: AnyObject {
     func popCurrentView()
+    func shareSong()
 }
 
 class HeaderStackView: UIStackView {
@@ -36,7 +37,11 @@ class HeaderStackView: UIStackView {
 
         return stackView
     }()
-    private lazy var rightButton = UIButton(image: "square.and.arrow.up")
+    private lazy var rightButton: UIButton = {
+        let buttonShare = UIButton(image: "square.and.arrow.up")
+        buttonShare.addTarget(self, action: #selector(shareSong), for: .touchUpInside)
+        return buttonShare
+    }()
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -72,5 +77,10 @@ class HeaderStackView: UIStackView {
     @objc
     private func popCurrentView() {
         delegate?.popCurrentView()
+    }
+
+    @objc
+    private func shareSong() {
+        delegate?.shareSong()
     }
 }
